@@ -92,7 +92,7 @@ while restart == 1:
 
             if message_choice in user_file:
                 sendfile = str(message_choice), '.txt'
-                sendfile = open(sendfile, "a")
+                sendfile = open(str(sendfile), "a")
                 try:
                     open(str(sendfile), "x")
                 except IOError:
