@@ -1,6 +1,5 @@
 import os
 import time
-import calendar
 import datetime
 
 def sign_in():
@@ -12,8 +11,7 @@ def sign_in():
     return temp_list
 
 
-## 24 hour format ##
-ts = time.strftime("%H:%M:%S")
+ts = datetime.datetime.now()
 program_log_out = 1
 log_in_success = 0
 restart = 1
@@ -57,6 +55,9 @@ while restart == 1:
             elif new_username not in x or new_password not in x:
                 file1.write("\n" + str(new_username) + ", " + str(new_password))
                 file2.write("\n" + str(new_username))
+                new_file = open("newfile.txt", "x")
+                newfile = current_user, '.txt'
+                os.rename("newfile.txt", str(newfile))
                 print("new account saved")
                 log_in_success = 1
 
@@ -78,6 +79,7 @@ while restart == 1:
     #print("")
 
     while program_log_out == 1:
+        message_choice = ""
         home_choice = input("Do you want to message_1 or read messages_2 or log out_3")
         if home_choice == "1":
             file2 = ""
@@ -86,16 +88,21 @@ while restart == 1:
                 file2 = open("usernamesave.txt", "r")
             except IOError:
                 print("error 404 / files not found")
-            ussr = file2.read()
-            if message_choice in ussr:
+            user_file = file2.read()
+
+            if message_choice in user_file:
+                sendfile = str(message_choice), '.txt'
+                try:
+                    open(str(sendfile), "x")
+                except IOError:
+                    print("error 404 / user files not found")
                 title = input("input your title    ")
                 message = input("input your message    ")
-                mail = (title, ts, '\n', message)
-                print(mail)
-                #new_file =  open("newfile.txt", "x")
-                #file.close()
 
-            if message_choice not in file2:
+                final_message = '\n', "From ", current_user, ts, '\n', title, '\n', message, '\n'
+                sendfile.append(final_message)
+
+            elif message_choice not in file2:
                 print("error user not found")
 
 

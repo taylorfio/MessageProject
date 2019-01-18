@@ -98,6 +98,8 @@ list1.append()
 
 f.write("\n" + str(name) + ", " + str(score))
 
+## 24 hour format ##
+ts = time.strftime("%H:%M:%S")
 
 
 # ask if wanting to create existing account or make new one
@@ -115,3 +117,5 @@ def log_out_account():
       return program_log_out + 1
    elif log_out == "2":
       return program_log_out + 0
+
+print('\n', "From ", current_user, ts, '\n', title, '\n', message, '\n')
