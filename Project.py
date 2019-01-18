@@ -92,6 +92,7 @@ while restart == 1:
 
             if message_choice in user_file:
                 sendfile = str(message_choice), '.txt'
+                sendfile = open(sendfile, "a")
                 try:
                     open(str(sendfile), "x")
                 except IOError:
@@ -100,7 +101,7 @@ while restart == 1:
                 message = input("input your message    ")
 
                 final_message = '\n', "From ", current_user, ts, '\n', title, '\n', message, '\n'
-                sendfile.append(final_message)
+                sendfile.write(final_message)
 
             elif message_choice not in file2:
                 print("error user not found")
