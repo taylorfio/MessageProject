@@ -1,5 +1,7 @@
+import os
 import time
 import calendar
+import datetime
 
 def sign_in():
     temp_list = []
@@ -10,7 +12,8 @@ def sign_in():
     return temp_list
 
 
-ts = calendar.timegm(time.gmtime())
+## 24 hour format ##
+ts = time.strftime("%H:%M:%S")
 program_log_out = 1
 log_in_success = 0
 restart = 1
@@ -83,14 +86,14 @@ while restart == 1:
                 file2 = open("usernamesave.txt", "r")
             except IOError:
                 print("error 404 / files not found")
-
-            if message_choice in file2:
-                title = input("input your title     ")
-                message = input("input your message     ")
-                mail =
-                #new_file =  open("myfile.txt", "x")
-
-# time stamp print(ts)
+            ussr = file2.read()
+            if message_choice in ussr:
+                title = input("input your title    ")
+                message = input("input your message    ")
+                mail = (title, ts, '\n', message)
+                print(mail)
+                #new_file =  open("newfile.txt", "x")
+                #file.close()
 
             if message_choice not in file2:
                 print("error user not found")
@@ -111,26 +114,26 @@ while restart == 1:
             elif log_out == "2":
                 program_log_out = program_log_out + 0
 
-            print("")
-            print("   _____                 _ _                ")
-            time.sleep(0.2)
-            print("  / ____|               | | |               ")
-            time.sleep(0.2)
-            print(" | |  __  ___   ___   __| | |__  _   _  ___ ")
-            time.sleep(0.2)
-            print(" | | |_ |/ _ \ / _ \ / _` | '_ \| | | |/ _ \ ")
-            time.sleep(0.2)
-            print(" | |__| | (_) | (_) | (_| | |_) | |_| |  __/")
-            time.sleep(0.2)
-            print("  \_____|\___/ \___/ \__,_|_.__/ \__, |\___|")
-            time.sleep(0.2)
-            print("                                  __/ |     ")
-            time.sleep(0.2)
-            print("                                 |___/      ")
-            print("")
-
         elif home_choice != "1" and home_choice != "2" and home_choice != "3":
             print("error")
+
+    print("")
+    print("   _____                 _ _                ")
+    time.sleep(0.2)
+    print("  / ____|               | | |               ")
+    time.sleep(0.2)
+    print(" | |  __  ___   ___   __| | |__  _   _  ___ ")
+    time.sleep(0.2)
+    print(" | | |_ |/ _ \ / _ \ / _` | '_ \| | | |/ _ \ ")
+    time.sleep(0.2)
+    print(" | |__| | (_) | (_) | (_| | |_) | |_| |  __/")
+    time.sleep(0.2)
+    print("  \_____|\___/ \___/ \__,_|_.__/ \__, |\___|")
+    time.sleep(0.2)
+    print("                                  __/ |     ")
+    time.sleep(0.2)
+    print("                                 |___/      ")
+    print("")
 
     restart_input = input("end session [y/n]   ")
     if restart_input == "y":
