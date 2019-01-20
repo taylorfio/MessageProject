@@ -82,6 +82,7 @@ while restart == 1:
     while program_log_out == 1:
         message_choice = ""
         home_choice = input("Do you want to message_1 or read messages_2 or log out_3")
+
         if home_choice == "1":
             file2 = ""
             message_choice = input("who do you want to message? ")
@@ -95,20 +96,36 @@ while restart == 1:
                 sendfile = str(message_choice) + ".txt"
                 # sendfile = open(str(sendfile), "a")
                 try:
-                    open(str(sendfile), "x")
+                    open(str(sendfile), "a")
+                    title = input("input your title    ")
+                    message = input("input your message    ")
+                    final_message = '\n', "From ", current_user, ts, '\n', title, '\n', message, '\n'
+                    sendfile.write(final_message)
+
                 except IOError:
                     print("error 404 / user files not found")
-                title = input("input your title    ")
-                message = input("input your message    ")
-
-                final_message = '\n', "From ", current_user, ts, '\n', title, '\n', message, '\n'
-                sendfile.write(final_message)
 
             elif message_choice not in file2:
                 print("error user not found")
 
         if home_choice == "2":
-            ""
+            read_file = ""
+            try:
+                read_file = open(current_user + ".txt")
+                print(read_file.read())
+                clearing_input = input("would you like to clear your inbox? [y/n]")
+
+                if clearing_input == "y":
+                    read_file.write("")
+                if clearing_input == "n":
+                    print("ok")
+                else:
+                    while clearing_input != "y" and "n":
+                        print("error")
+                        clearing_input = input("would you like to clear your inbox? [y/n]")
+
+            except IOError:
+                print("error 404 / user files not found")
 
         if home_choice == "3":
             log_out = input("do you want to log out: yes_1 or no_2  ")
@@ -148,9 +165,5 @@ while restart == 1:
         program_log_out = 1
         log_in_success = 0
 
-
-# create variable that knows which user is logged in
-# ask who you want to message (if don't exist error)
-# save message in a .txt for person to see
 
 
