@@ -76,8 +76,8 @@ while restart == 1:
     print("     \/  \/ \___|_|\___\___/|_| |_| |_|\___|")
     time.sleep(0.2)
     print("")
-    #print(put variable that defines the username )
-    #print("")
+    print(current_user)
+    print("")
 
     while program_log_out == 1:
         message_choice = ""
@@ -116,7 +116,7 @@ while restart == 1:
                 clearing_input = input("would you like to clear your inbox? [y/n]")
 
                 if clearing_input == "y":
-                    read_file.write("")
+                    read_file.write("")  # how to clear a text file
                 if clearing_input == "n":
                     print("ok")
                 else:
@@ -164,6 +164,4 @@ while restart == 1:
     if restart_input == "n":
         program_log_out = 1
         log_in_success = 0
-
-
 
