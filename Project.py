@@ -111,12 +111,15 @@ while restart == 1:
         if home_choice == "2":
             read_file = ""
             try:
-                read_file = open(current_user + ".txt")
+                read_file = open(current_user + ".txt", "r")
+                print("")
                 print(read_file.read())
+                print("")
                 clearing_input = input("would you like to clear your inbox? [y/n]")
 
                 if clearing_input == "y":
-                    read_file.write("")  # how to clear a text file
+                    read_file = open(current_user + ".txt", "w")
+                    read_file.write("")
                 if clearing_input == "n":
                     print("ok")
                 else:
@@ -124,7 +127,7 @@ while restart == 1:
                         print("error")
                         clearing_input = input("would you like to clear your inbox? [y/n]")
 
-            except IOError:
+            except IOError:  # print the line after the top completes
                 print("error 404 / user files not found")
 
         if home_choice == "3":
