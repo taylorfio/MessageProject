@@ -1,7 +1,2 @@
 admin
 taylor
-stubbs
-colin
-leo
-chrizzz
-poo
