@@ -2,6 +2,7 @@ import os
 import time
 import datetime
 
+
 def sign_in():
     temp_list = []
     username = input("enter username  ")
@@ -43,7 +44,7 @@ while restart == 1:
             else:
                 print("error 404 / account not found ")
 
-        if account_selection == "2":
+        elif account_selection == "2":
             temp_list = sign_in()
             new_username = temp_list[0]
             current_user = new_username
@@ -56,7 +57,7 @@ while restart == 1:
                 file1.write("\n" + str(new_username) + ", " + str(new_password))
                 file2.write("\n" + str(new_username))
                 new_file = open("newfile.txt", "x")
-                newfile = current_user, '.txt'
+                newfile = current_user + ".txt"
                 os.rename("newfile.txt", str(newfile))
                 print("new account saved")
                 log_in_success = 1
@@ -91,8 +92,8 @@ while restart == 1:
             user_file = file2.read()
 
             if message_choice in user_file:
-                sendfile = str(message_choice), '.txt'
-                sendfile = open(str(sendfile), "a")
+                sendfile = str(message_choice) + ".txt"
+                # sendfile = open(str(sendfile), "a")
                 try:
                     open(str(sendfile), "x")
                 except IOError:
@@ -105,9 +106,6 @@ while restart == 1:
 
             elif message_choice not in file2:
                 print("error user not found")
-
-
-
 
         if home_choice == "2":
             ""
