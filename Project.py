@@ -174,14 +174,11 @@ while restart == 1:
     print("")
 
     restart_input = input("end session [y/n]   ")
+    while restart_input != "y" and restart_input != "n":
+        print("error")
+        restart_input = input("end session [y/n]   ")
     if restart_input == "y":
         restart = restart + 1
         sys.exit()
     if restart_input == "n":
         print("logging you out")
-    while restart_input != "y" and restart_input != "n":
-        print("error")
-        restart_input = input("end session [y/n]   ")
-
-# the program won't stop after the an error then entering yes
-# make a function to best solve this problem
