@@ -68,6 +68,9 @@ while restart == 1:
                 print("new account saved")
                 log_in_success = 1
 
+        file1.close()
+        file2.close()
+
     print("")
     print(" __          __  _                          ")
     time.sleep(0.2)
@@ -103,8 +106,7 @@ while restart == 1:
                     writefile = open(str(sendfile), "a")
                     title = input("input your title    ")
                     message = input("input your message    ")
-                    # final_message = '\n', "From ", current_user, ts, '\n', title, '\n', message, '\n'
-                    writefile.write('\n' + "From" + current_user + str(ts) + '\n' + title + '\n' + message + '\n')
+                    writefile.write('\n' + "From" + current_user + " " + str(ts) + '\n' + "     " + title + '\n' + message + '\n')
                     writefile.close()
                     print("success")
 
@@ -116,7 +118,6 @@ while restart == 1:
             file2.close()
 
         if home_choice == "2":
-            read_file = ""
             try:
                 read_file = open(current_user + ".txt", "r")
                 print("")
@@ -177,4 +178,6 @@ while restart == 1:
     if restart_input == "n":
         program_log_out = 1
         log_in_success = 0
-
+    while restart_input != "y" and "n":
+        print("error")
+        restart_input = input("end session [y/n]   ")
