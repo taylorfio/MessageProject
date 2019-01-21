@@ -1,4 +1,4 @@
-import os
+import os, sys
 import time
 import datetime
 import hashlib
@@ -13,13 +13,13 @@ def sign_in():
     return temp_list
 
 
-ts = datetime.datetime.now()
-program_log_out = 1
-log_in_success = 0
 restart = 1
-current_user = ""
-
 while restart == 1:
+    ts = datetime.datetime.now()
+    program_log_out = 1
+    log_in_success = 0
+    current_user = ""
+
     while log_in_success == 0:
         file1 = ""
         file2 = ""
@@ -106,7 +106,7 @@ while restart == 1:
                     writefile = open(str(sendfile), "a")
                     title = input("input your title    ")
                     message = input("input your message    ")
-                    writefile.write('\n' + "From" + current_user + " " + str(ts) + '\n' + "     " + title + '\n' + message + '\n')
+                    writefile.write('\n' + "From " + current_user + " " + str(ts) + '\n' + "     " + title + '\n' + message + '\n')
                     writefile.close()
                     print("success")
 
@@ -130,6 +130,7 @@ while restart == 1:
                     read_file = open(current_user + ".txt", "w")
                     read_file.write("")
                     read_file.close()
+                    print("cleared")
                 if clearing_input == "n":
                     print("ok")
                 else:
@@ -175,9 +176,12 @@ while restart == 1:
     restart_input = input("end session [y/n]   ")
     if restart_input == "y":
         restart = restart + 1
+        sys.exit()
     if restart_input == "n":
-        program_log_out = 1
-        log_in_success = 0
-    while restart_input != "y" and "n":
+        print("logging you out")
+    while restart_input != "y" and restart_input != "n":
         print("error")
         restart_input = input("end session [y/n]   ")
+
+# the program won't stop after the an error then entering yes
+# make a function to best solve this problem
