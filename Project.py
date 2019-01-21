@@ -1,6 +1,7 @@
 import os
 import time
 import datetime
+import hashlib
 
 
 def sign_in():
@@ -37,7 +38,9 @@ while restart == 1:
             temp_list = sign_in()
             account_username = temp_list[0]
             current_user = account_username
-            account_password = temp_list[1]
+            hasher = hashlib.md5()
+            hasher.update(temp_list[1].encode('utf-8'))
+            account_password = hasher.hexdigest()
             x = file1.read()
             if str(account_username) + ", " + str(account_password) in x:
                 log_in_success = 1
@@ -54,7 +57,10 @@ while restart == 1:
             if str(new_username) + ", " + str(new_password) in x or str(new_username) in y:
                 print("error / account already exists")
             elif new_username not in x or new_password not in x:
-                file1.write("\n" + str(new_username) + ", " + str(new_password))
+                hasher = hashlib.md5()
+                hasher.update(new_password.encode('utf-8'))
+                hasher.hexdigest()
+                file1.write("\n" + str(new_username) + ", " + str(hasher.hexdigest()))
                 file2.write("\n" + str(new_username))
                 new_file = open("newfile.txt", "x")
                 newfile = current_user + ".txt"
@@ -91,22 +97,23 @@ while restart == 1:
             except IOError:
                 print("error 404 / files not found")
             user_file = file2.read()
-
             if message_choice in user_file:
                 sendfile = str(message_choice) + ".txt"
-                # sendfile = open(str(sendfile), "a")
                 try:
-                    open(str(sendfile), "a")
+                    writefile = open(str(sendfile), "a")
                     title = input("input your title    ")
                     message = input("input your message    ")
-                    final_message = '\n', "From ", current_user, ts, '\n', title, '\n', message, '\n'
-                    sendfile.write(final_message)
+                    # final_message = '\n', "From ", current_user, ts, '\n', title, '\n', message, '\n'
+                    writefile.write('\n' + "From" + current_user + str(ts) + '\n' + title + '\n' + message + '\n')
+                    writefile.close()
+                    print("success")
 
                 except IOError:
-                    print("error 404 / user files not found")
+                    print("error 404 / user files not found1")
 
             elif message_choice not in file2:
                 print("error user not found")
+            file2.close()
 
         if home_choice == "2":
             read_file = ""
@@ -115,20 +122,23 @@ while restart == 1:
                 print("")
                 print(read_file.read())
                 print("")
+                read_file.close()
                 clearing_input = input("would you like to clear your inbox? [y/n]")
 
                 if clearing_input == "y":
                     read_file = open(current_user + ".txt", "w")
                     read_file.write("")
+                    read_file.close()
                 if clearing_input == "n":
                     print("ok")
                 else:
                     while clearing_input != "y" and "n":
                         print("error")
                         clearing_input = input("would you like to clear your inbox? [y/n]")
+                read_file.close()
 
-            except IOError:  # print the line after the top completes
-                print("error 404 / user files not found")
+            except IOError:
+                print("error 404 / user files not found2")
 
         if home_choice == "3":
             log_out = input("do you want to log out: yes_1 or no_2  ")
