@@ -66,6 +66,7 @@ while restart == 1:
                 newfile = current_user + ".txt"
                 os.rename("newfile.txt", str(newfile))
                 print("new account saved")
+                new_file.close()
                 log_in_success = 1
 
         file1.close()
@@ -109,9 +110,8 @@ while restart == 1:
                     writefile.write('\n' + "From " + current_user + " " + str(ts) + '\n' + "     " + title + '\n' + message + '\n')
                     writefile.close()
                     print("success")
-
                 except IOError:
-                    print("error 404 / user files not found1")
+                    print("error 404 / user files not found")
 
             elif message_choice not in file2:
                 print("error user not found")
@@ -125,7 +125,9 @@ while restart == 1:
                 print("")
                 read_file.close()
                 clearing_input = input("would you like to clear your inbox? [y/n]")
-
+                while clearing_input != "y" and clearing_input != "n":
+                    print("error")
+                    clearing_input = input("would you like to clear your inbox? [y/n]")
                 if clearing_input == "y":
                     read_file = open(current_user + ".txt", "w")
                     read_file.write("")
@@ -133,14 +135,9 @@ while restart == 1:
                     print("cleared")
                 if clearing_input == "n":
                     print("ok")
-                else:
-                    while clearing_input != "y" and "n":
-                        print("error")
-                        clearing_input = input("would you like to clear your inbox? [y/n]")
                 read_file.close()
-
             except IOError:
-                print("error 404 / user files not found2")
+                print("error 404 / user files not found")
 
         if home_choice == "3":
             log_out = input("do you want to log out: yes_1 or no_2  ")
