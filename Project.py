@@ -100,8 +100,14 @@ while restart == 1:
                 file2 = open("usernamesave.txt", "r")
             except IOError:
                 print("error 404 / files not found")
-            user_file = file2.read()
-            if message_choice in user_file:
+            usercheck = False
+            user_file = file2.readlines()
+            for userx in user_file:
+                holder = userx.strip()
+                if message_choice == holder:
+                    usercheck = True
+                    break
+            if usercheck == True:
                 sendfile = str(message_choice) + ".txt"
                 try:
                     writefile = open(str(sendfile), "a")
