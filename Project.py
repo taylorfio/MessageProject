@@ -1,10 +1,28 @@
+"""
+In this program, you start by either signing in with a previously created account or creating an account.
+If you choose to create an account you enter a username and a password then the program checks to see if it has
+already been taken.  If not it stores and hashes your password and stores a plain text username in separate files.
+It also creates a .txt file for you to receive messages from other users. then you get logged in. If you choose to
+log in with a previously made account it checks to see if the username exists and then hashes the password and
+checks to see if it exists with the username. If everything matches then you log in. When you log in you can message
+another user, read messages sent to you and you are given the option to log out. If you choose to message someone
+it asks whom you want to message. It then checks with its file for usernames to check if it exists. If it does then
+it lets you write a title and a main message. Then it appends the message with who sent it, a time stamp and other
+formatting to the user you are messagings read file. If you choose to read your messages the program opens the text
+file with your username on it and prints all the messages. Then you get an option to clear your inbox and if you
+press yes it wipes the text file of all the messages. If you choose to log out it asks you to confirm then if you do
+it asks if you want to send the session. If you don't it logs you out and takes you back to the sign in menu. If
+you do end the session it ends the program.
+"""
+
+
 import os, sys
 import time
 import datetime
 import hashlib
 
 
-def sign_in():
+def sign_in():  # this function
     temp_list = []
     username = input("enter username  ")
     temp_list.append(username)
