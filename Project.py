@@ -71,7 +71,7 @@ while restart == 1:
             new_password = temp_list[1]  # the second part of the list is the password input
             x = file1.read()  # reads the username and password save file
             y = file2.read()
-            if str(new_username) + ", " + str(new_password) in x or str(new_username) in y:  # checks to see if the username exists by its self and also if the password exists too
+            if str(new_username) + ", " + str(new_password) in x and str(new_username) in y:  # checks to see if the username exists by its self and also if the password exists too
                 print("error / account already exists")
             elif new_username not in x or new_password not in x:  # if its not in the save files then it saves the information to them
                 hasher = hashlib.md5()  # the hasher import is called
