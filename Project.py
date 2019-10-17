@@ -70,16 +70,16 @@ while restart == 1:
             current_user = new_username  # sets the current user as the input
             new_password = temp_list[1]  # the second part of the list is the password input
             x = file1.read()  # reads the username and password save file
-            y = file2.read()
-            if str(new_username) + ", " + str(new_password) in x and str(new_username) in y:  # checks to see if the username exists by its self and also if the password exists too
+            y = file2.read()  # reads the username save file
+            if str(new_username) in y:  # checks to see if the username exists
                 print("error / account already exists")
-            elif new_username not in x or new_password not in x:  # if its not in the save files then it saves the information to them
+            elif new_username not in y:  # if its not in the save files then it saves the information to them
                 hasher = hashlib.md5()  # the hasher import is called
                 hasher.update(new_password.encode('utf-8'))  # the hasher is hashing the password input from the list
                 hasher.hexdigest()
                 file1.write("\n" + str(new_username) + ", " + str(hasher.hexdigest()))  # the password is saved with the username
                 file2.write("\n" + str(new_username))  # the username is saved
-                new_file = open("newfile.txt", "x")  # craetes a new file for the user to recive messages to
+                new_file = open("newfile.txt", "x")  # creates a new file for the user to receive messages to
                 newfile = current_user + ".txt"  # creates a name for the users file with their chosen username
                 os.rename("newfile.txt", str(newfile))  # renames the file with their chosen username
                 print("new account saved")
